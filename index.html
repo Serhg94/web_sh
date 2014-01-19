@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>webSH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <link href="css/codiqa.ext.css" rel="stylesheet">
+  <link href="css/jquery.mobile.theme-1.3.1.css" rel="stylesheet">
+  <link href="css/jquery-mobile.css" rel="stylesheet">
+  <link href="css/jquery.mobile.structure-1.3.1.css" rel="stylesheet">
+
+  <script src="js/jquery-1.9.1.js"></script>
+  <script src="js/jquery.mobile-1.3.1.js"></script>
+  <script src="js/codiqa.ext.js"></script>
+  <script src="js/socket.io.js"></script>
+  <script src="js/websh.js"></script>
+</head>
+<body>
+  <div data-role="page" data-control-title="main" id="page8">
+      <div data-role="content">
+          <a id="time" data-role="button" href="#page8">
+              Время
+          </a>
+		  <a id="temp" data-role="button" href="#page8">
+              Температура
+          </a>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <a id="3_svt" data-role="button" href="#page8">
+              <br>Свет в прихожей<br>&nbsp;
+          </a>
+          <a id="ev_but" data-role="button" href="statspage.php">
+              События
+          </a>
+          <a id="bud_btn" data-role="button" href="#page9">
+              Будильники
+          </a>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <a data-role="button" href="#page4" data-icon="bars" data-iconpos="top">
+                  </a>
+              </div>
+              <div class="ui-block-b">
+                  <a id="options" data-role="button" data-transition="none" href="#page11" data-icon="gear"
+                  data-iconpos="top">
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="Большая комната" id="page2">
+      <div data-role="content">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page2" data-transition="fade" data-theme="a" data-icon="arrow-d">
+                                  Большая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page3" data-transition="fade" data-theme="a" data-icon="">
+                                  Маленькая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page4" data-transition="fade" data-theme="a" data-icon="">
+                                  Прихожая
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page5" data-transition="fade" data-theme="a" data-icon="">
+                                  Кухня
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page6" data-transition="fade" data-theme="a" data-icon="">
+                                  С/У
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page7" data-transition="fade" data-theme="a" data-icon="">
+                                  Балкон
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <a id="1_lite" data-role="button" href="#page2">
+                      Люстра - малый
+                  </a>
+              </div>
+              <div class="ui-block-b">
+                  <a id="1_big" data-role="button" href="#page2">
+                      Люстра - большой
+                  </a>
+              </div>
+          </div>
+          <a id="1_bra" data-role="button" href="#page2">
+              Светильник
+          </a>
+          <div class="ui-grid-c">
+              <div class="ui-block-a">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Температура:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div id="1_tem" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Влажность:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-d">
+                  <div id="1_hum" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <a data-role="button" href="#page8" data-icon="home" data-iconpos="top">
+          </a>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="Маленькая" id="page3">
+      <div data-role="panel" id="panel9" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="content">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page2" data-transition="fade" data-theme="a" data-icon="">
+                                  Большая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page3" data-transition="fade" data-theme="a" data-icon="arrow-d">
+                                  Маленькая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page4" data-transition="fade" data-theme="a" data-icon="">
+                                  Прихожая
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page5" data-transition="fade" data-theme="a" data-icon="">
+                                  Кухня
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page6" data-transition="fade" data-theme="a" data-icon="">
+                                  С/У
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page7" data-transition="fade" data-theme="a" data-icon="">
+                                  Балкон
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <a id="2_big" data-role="button" href="#page3">
+              Люстра
+          </a>
+          <a id="2_lite" data-role="button" href="#page3">
+              Лампа
+          </a>
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <a id="2_open" data-role="button" href="#page3">
+                      Открыть жалюзи
+                  </a>
+              </div>
+              <div class="ui-block-b">
+                  <a id="2_close" data-role="button" href="#page3">
+                      Закрыть жалюзи
+                  </a>
+              </div>
+          </div>
+          <div class="ui-grid-c">
+              <div class="ui-block-a">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Температура:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div id="2_tem" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Влажность:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-d">
+                  <div id="2_hum" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <a data-role="button" href="#page8" data-icon="home" data-iconpos="top">
+          </a>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="Прихожая" id="page4">
+      <div data-role="panel" id="panel11" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="panel" id="panel12" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="content">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page2" data-transition="fade" data-theme="a" data-icon="">
+                                  Большая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page3" data-transition="fade" data-theme="a" data-icon="">
+                                  Маленькая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page4" data-transition="fade" data-theme="a" data-icon="arrow-d">
+                                  Прихожая
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page5" data-transition="fade" data-theme="a" data-icon="">
+                                  Кухня
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page6" data-transition="fade" data-theme="a" data-icon="">
+                                  С/У
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page7" data-transition="fade" data-theme="a" data-icon="">
+                                  Балкон
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <a id="3_big" data-role="button" href="#page4">
+              Люстра
+          </a>
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <a id="3_door" data-role="button" href="#page4">
+                      Дверь
+                  </a>
+              </div>
+              <div class="ui-block-b">
+                  <a id="3_lock" data-role="button" href="#page4">
+                      Замок
+                  </a>
+              </div>
+          </div>
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <a id="3_open" data-role="button" href="#page4">
+                      Открыть замок
+                  </a>
+              </div>
+              <div class="ui-block-b">
+                  <a id="3_close" data-role="button" href="#page4">
+                      Закрыть замок
+                  </a>
+              </div>
+          </div>
+		  <a id="3_DD" data-role="button" href="#page4">
+              Включать свет по датчику движения
+          </a>
+          <div class="ui-grid-c">
+              <div class="ui-block-a">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Температура:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div id="3_tem" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Влажность:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-d">
+                  <div id="3_hum" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <a data-role="button" href="#page8" data-icon="home" data-iconpos="top">
+          </a>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="Кухня" id="page5">
+      <div data-role="panel" id="panel14" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="panel" id="panel15" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="panel" id="panel16" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="content">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page2" data-transition="fade" data-theme="a" data-icon="">
+                                  Большая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page3" data-transition="fade" data-theme="a" data-icon="">
+                                  Маленькая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page4" data-transition="fade" data-theme="a" data-icon="">
+                                  Прихожая
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page5" data-transition="fade" data-theme="a" data-icon="arrow-d">
+                                  Кухня
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page6" data-transition="fade" data-theme="a" data-icon="">
+                                  С/У
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page7" data-transition="fade" data-theme="a" data-icon="">
+                                  Балкон
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <a id="4_svet" data-role="button" href="#page5">
+              Свет
+          </a>
+          <div data-role="fieldcontain" data-controltype="slider">
+              <label for="4_vent">
+                  Вентилляция
+              </label>
+              <input id="4_vent" type="range" name="slider" value="50" min="0" max="100"
+              data-highlight="false">
+          </div>
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <a id="4_gas" data-role="button" href="#page5">
+                      Датчик газа
+                  </a>
+              </div>
+              <div class="ui-block-b">
+                  <a id="4_close" data-role="button" href="#page5">
+                      Перекрыть газ
+                  </a>
+              </div>
+          </div>
+          <div class="ui-grid-c">
+              <div class="ui-block-a">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Температура:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div id="4_tem" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Влажность:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-d">
+                  <div id="4_hum" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <a data-role="button" href="#page8" data-icon="home" data-iconpos="top">
+          </a>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="Ванная/туалет" id="page6">
+      <div data-role="panel" id="panel4" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="content">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page2" data-transition="fade" data-theme="a" data-icon="">
+                                  Большая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page3" data-transition="fade" data-theme="a" data-icon="">
+                                  Маленькая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page4" data-transition="fade" data-theme="a" data-icon="">
+                                  Прихожая
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+                  <a id="5_svet1" data-role="button" href="#page6">
+                      Свет в туалете
+                  </a>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page5" data-transition="fade" data-theme="a" data-icon="">
+                                  Кухня
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page6" data-transition="fade" data-theme="a" data-icon="arrow-d">
+                                  С/У
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page7" data-transition="fade" data-theme="a" data-icon="">
+                                  Балкон
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+                  <a id="5_svet2" data-role="button" href="#page6">
+                      Свет в ванной
+                  </a>
+              </div>
+          </div>
+          <a id="5_vent" data-role="button" href="#page6">
+              Вентиляция
+          </a>
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <a id="5_prot1" data-role="button" href="#page6">
+                      Протечка
+                  </a>
+              </div>
+              <div class="ui-block-b">
+                  <a id="5_prot2" data-role="button" href="#page6">
+                      Протечка
+                  </a>
+              </div>
+          </div>
+          <a id="5_close" data-role="button" href="#page6">
+              Перекрыть воду
+          </a>
+          <div class="ui-grid-c">
+              <div class="ui-block-a">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Температура:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div id="5_tem" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Влажность:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-d">
+                  <div id="5_hum" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <a data-role="button" href="#page8" data-icon="home" data-iconpos="top">
+          </a>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="Балкон" id="page7">
+      <div data-role="panel" id="panel6" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="panel" id="panel7" data-position="right" data-display="reveal"
+      data-theme="a">
+          <ul data-role="listview" data-divider-theme="h" data-inset="false">
+              <li data-role="list-divider" role="heading">
+                  Комнаты
+              </li>
+              <li data-theme="a">
+                  <a href="#page2" data-transition="slide">
+                      Большая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page3" data-transition="slide">
+                      Маленькая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page4" data-transition="slide">
+                      Прихожая
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page5" data-transition="slide">
+                      Кухня
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page6" data-transition="slide">
+                      С/У
+                  </a>
+              </li>
+              <li data-theme="a">
+                  <a href="#page7" data-transition="slide">
+                      Балкон
+                  </a>
+              </li>
+              <li data-role="list-divider" role="heading">
+                  Divider
+              </li>
+          </ul>
+      </div>
+      <div data-role="content">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page2" data-transition="fade" data-theme="a" data-icon="">
+                                  Большая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page3" data-transition="fade" data-theme="a" data-icon="">
+                                  Маленькая
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page4" data-transition="fade" data-theme="a" data-icon="">
+                                  Прихожая
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="navbar" data-iconpos="top">
+                      <ul>
+                          <li>
+                              <a href="#page5" data-transition="fade" data-theme="a" data-icon="">
+                                  Кухня
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page6" data-transition="fade" data-theme="a" data-icon="">
+                                  С/У
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#page7" data-transition="fade" data-theme="a" data-icon="arrow-d">
+                                  Балкон
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <a id="6_svet" data-role="button" href="#page7">
+              Свет
+          </a>
+          <a id="6_vent" data-role="button" href="#page7">
+              Вентиляция
+          </a>
+          <div class="ui-grid-c">
+              <div class="ui-block-a">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Температура:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div id="6_tem" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-controltype="textblock">
+                      <p>
+                          <b>
+                              Влажность:
+                          </b>
+                      </p>
+                  </div>
+              </div>
+              <div class="ui-block-d">
+                  <div id="6_hum" data-controltype="textblock">
+                      <p>
+                          <b>
+                              -
+                          </b>
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <hr style="height:3px; background-color:#ccc; border:0; margin-top:12px; margin-bottom:12px;">
+          <a data-role="button" href="#page8" data-icon="home" data-iconpos="top">
+          </a>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="settings" id="page9">
+      <div data-role="content">
+          <div class="ui-grid-b">
+              <div class="ui-block-a">
+                  <h2>
+                      Будильники
+                  </h2>
+              </div>
+              <div class="ui-block-b">
+                  <a id="budok" data-role="button" href="#page8">
+                      ОК
+                  </a>
+              </div>
+              <div class="ui-block-c">
+                  <a data-role="button" href="#page8" data-icon="refresh" data-iconpos="top">
+                  </a>
+              </div>
+          </div>
+          <div class="ui-grid-b">
+              <div class="ui-block-a">
+                  <h4>
+                      Первый
+                  </h4>
+              </div>
+              <div class="ui-block-b">
+                  <h4>
+                      Второй
+                  </h4>
+              </div>
+              <div class="ui-block-c">
+                  <h4>
+                      Третий
+                  </h4>
+              </div>
+              <div class="ui-block-a">
+                  <div data-role="fieldcontain" data-controltype="toggleswitch">
+                      <select name="toggleswitch3" id="bud1ena" data-theme="" data-role="slider">
+                          <option value="off">
+                              Off
+                          </option>
+                          <option value="on">
+                              On
+                          </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="fieldcontain" data-controltype="toggleswitch">
+                      <select name="toggleswitch4" id="bud2ena" data-theme="" data-role="slider">
+                          <option value="off">
+                              Off
+                          </option>
+                          <option value="on">
+                              On
+                          </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-role="fieldcontain" data-controltype="toggleswitch">
+                      <select name="toggleswitch5" id="bud3ena" data-theme="" data-role="slider">
+                          <option value="off">
+                              Off
+                          </option>
+                          <option value="on">
+                              On
+                          </option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <div class="ui-grid-b">
+              <div class="ui-block-a">
+                  <div data-role="fieldcontain" data-controltype="dateinput">
+                      <input name="" id="bud1time" placeholder="" value="" type="time">
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="fieldcontain" data-controltype="dateinput">
+                      <input name="" id="bud2time" placeholder="" value="" type="time">
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-role="fieldcontain" data-controltype="dateinput">
+                      <input name="" id="bud3time" placeholder="" value="" type="time">
+                  </div>
+              </div>
+              <div class="ui-block-a">
+                  <div id="bud1days" data-role="fieldcontain" data-controltype="checkboxes">
+                      <fieldset data-role="controlgroup" data-type="vertical">
+                          <input id="checkbox1" name="" type="checkbox">
+                          <label for="checkbox1">
+                              Пн
+                          </label>
+                          <input id="checkbox2" name="" type="checkbox">
+                          <label for="checkbox2">
+                              Вт
+                          </label>
+                          <input id="checkbox3" name="" type="checkbox">
+                          <label for="checkbox3">
+                              Ср
+                          </label>
+                          <input id="checkbox4" name="" type="checkbox">
+                          <label for="checkbox4">
+                              Чт
+                          </label>
+                          <input id="checkbox5" name="" type="checkbox">
+                          <label for="checkbox5">
+                              Пт
+                          </label>
+                          <input id="checkbox6" name="" type="checkbox">
+                          <label for="checkbox6">
+                              Сб
+                          </label>
+                          <input id="checkbox7" name="" type="checkbox">
+                          <label for="checkbox7">
+                              Вс
+                          </label>
+                      </fieldset>
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div id="bud2days" data-role="fieldcontain" data-controltype="checkboxes">
+                      <fieldset data-role="controlgroup" data-type="vertical">
+                          <input id="checkbox8" name="" type="checkbox">
+                          <label for="checkbox8">
+                              Пн
+                          </label>
+                          <input id="checkbox16" name="" type="checkbox">
+                          <label for="checkbox16">
+                              Вт
+                          </label>
+                          <input id="checkbox17" name="" type="checkbox">
+                          <label for="checkbox17">
+                              Ср
+                          </label>
+                          <input id="checkbox18" name="" type="checkbox">
+                          <label for="checkbox18">
+                              Чт
+                          </label>
+                          <input id="checkbox19" name="" type="checkbox">
+                          <label for="checkbox19">
+                              Пт
+                          </label>
+                          <input id="checkbox20" name="" type="checkbox">
+                          <label for="checkbox20">
+                              Сб
+                          </label>
+                          <input id="checkbox21" name="" type="checkbox">
+                          <label for="checkbox21">
+                              Вс
+                          </label>
+                      </fieldset>
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div id="bud3days" data-role="fieldcontain" data-controltype="checkboxes">
+                      <fieldset data-role="controlgroup" data-type="vertical">
+                          <input id="checkbox9" name="" type="checkbox">
+                          <label for="checkbox9">
+                              Пн
+                          </label>
+                          <input id="checkbox10" name="" type="checkbox">
+                          <label for="checkbox10">
+                              Вт
+                          </label>
+                          <input id="checkbox11" name="" type="checkbox">
+                          <label for="checkbox11">
+                              Ср
+                          </label>
+                          <input id="checkbox12" name="" type="checkbox">
+                          <label for="checkbox12">
+                              Чт
+                          </label>
+                          <input id="checkbox13" name="" type="checkbox">
+                          <label for="checkbox13">
+                              Пт
+                          </label>
+                          <input id="checkbox14" name="" type="checkbox">
+                          <label for="checkbox14">
+                              Сб
+                          </label>
+                          <input id="checkbox15" name="" type="checkbox">
+                          <label for="checkbox15">
+                              Вс
+                          </label>
+                      </fieldset>
+                  </div>
+              </div>
+              <div class="ui-block-a">
+                  <div data-role="fieldcontain" data-controltype="textinput">
+                      <input name="" id="bud1cmd" placeholder="" value="" type="text">
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-role="fieldcontain" data-controltype="textinput">
+                      <input name="" id="bud2cmd" placeholder="" value="" type="text">
+                  </div>
+              </div>
+              <div class="ui-block-c">
+                  <div data-role="fieldcontain" data-controltype="textinput">
+                      <input name="" id="bud3cmd" placeholder="" value="" type="text">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="events" id="page10">
+      <div data-role="content">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <h2>
+                      События_OLD
+                  </h2>
+              </div>
+              <div class="ui-block-b">
+                  <a data-role="button" href="#page8" data-icon="refresh" data-iconpos="top">
+                  </a>
+              </div>
+          </div>
+          <div data-controltype="htmlblock">
+              <p>
+              </p>
+          </div>
+      </div>
+  </div>
+  <div data-role="page" data-control-title="config" id="page11">
+      <div data-role="content">
+          <div class="ui-grid-a">
+              <div class="ui-block-a">
+                  <h2>
+                      Опции
+                  </h2>
+              </div>
+              <div class="ui-block-b">
+                  <a data-role="button" href="#page8" data-icon="refresh" data-iconpos="top">
+                  </a>
+              </div>
+          </div>
+          <!--<form action="http://192.168.0.99:8080/jsfs.html" method="POST">
+              <input type="hidden" name="" value="">
+          </form>
+          <a data-role="button" data-theme="a" href="http://192.168.0.99:8080/jsfs.html">
+              Камера
+          </a>-->
+		  <input id="sayinfobox" name="" type="checkbox">
+		  <label for="sayinfobox">
+			  Говорить инфу при откртии двери
+		  </label>
+		  <input id="ddnightbox" name="" type="checkbox">
+		  <label for="ddnightbox">
+			  Выключать датчик движения ночью
+		  </label>
+		  <input id="dooralertbox" name="" type="checkbox">
+		  <label for="dooralertbox">
+			  Предупреждать о незакрытой двери ночью
+		  </label>
+		  <input id="lockalertbox" name="" type="checkbox">
+		  <label for="lockalertbox">
+			  Предупреждать о незакрытом замке ночью
+		  </label>
+		  <input id="doorlightbox" name="" type="checkbox">
+		  <label for="doorlightbox">
+			  Включать свет при открытии двери
+		  </label>
+      </div>
+  </div>
+</body>
+</html>

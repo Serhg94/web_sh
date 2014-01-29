@@ -254,6 +254,9 @@ window.onload = function() {
 		document.getElementById('2_close').onclick = function() {
 			socket.emit('messagefromCl', '02set2221');
 		}
+		document.getElementById('3_lock').onclick = function() {
+			socket.emit('messagefromCl', '03set222222222221');
+		}
 		document.getElementById('sayinfobox').onclick = function() {changeOptions();}
 		document.getElementById('ddnightbox').onclick = function() {changeOptions();}
 		document.getElementById('dooralertbox').onclick = function() {changeOptions();}

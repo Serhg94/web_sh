@@ -34,7 +34,7 @@
 		else $('#3_svt').addClass("ui-btn-active");
 		if (butt[3].charAt(0)=='1') $('#3_door').removeClass("ui-btn-active");
 		else $('#3_door').addClass("ui-btn-active");
-		if (butt[3].charAt(2)=='1') $('#3_lock').removeClass("ui-btn-active");
+		if (butt[3].charAt(3)=='1') $('#3_lock').removeClass("ui-btn-active");
 		else $('#3_lock').addClass("ui-btn-active");
 		if (sets[3].charAt(9)=='0') $('#3_DD').removeClass("ui-btn-active");
 		else $('#3_DD').addClass("ui-btn-active");

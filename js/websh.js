@@ -38,6 +38,14 @@
 		else $('#3_lock').addClass("ui-btn-active");
 		if (sets[3].charAt(9)=='0') $('#3_DD').removeClass("ui-btn-active");
 		else $('#3_DD').addClass("ui-btn-active");
+		if (butt[6].charAt(2)=='1') $('#5_leak').removeClass("ui-btn-active");
+		else $('#5_leak').addClass("ui-btn-active");
+		if (sets[6].charAt(2)=='0') $('#5_sliv').removeClass("ui-btn-active");
+		else $('#5_sliv').addClass("ui-btn-active");
+		if (sets[6].charAt(3)=='0') $('#5_svet1').removeClass("ui-btn-active");
+		else $('#5_svet1').addClass("ui-btn-active");
+		if (sets[6].charAt(10)=='0') $('#5_vent').removeClass("ui-btn-active");
+		else $('#5_vent').addClass("ui-btn-active");
 		
 		$("#1_tem").html("<br><b>"+stat[1][1]+"</b>");
 		$("#2_tem").html("<br><b>"+stat[2][1]+"</b>");
@@ -241,6 +249,18 @@ window.onload = function() {
 		document.getElementById('1_bra').onclick = function() {
 			if (sets[1].charAt(2)=='0') socket.emit('messagefromCl', '01set2212222222');
 			else socket.emit('messagefromCl', '01set2202222222');
+		}
+		document.getElementById('5_svet1').onclick = function() {
+			if (sets[6].charAt(3)=='0') socket.emit('messagefromCl', '06set2221');
+			else socket.emit('messagefromCl', '06set2220');
+		}
+		document.getElementById('5_sliv').onclick = function() {
+			if (sets[6].charAt(2)=='0') socket.emit('messagefromCl', '06set2212');
+			else socket.emit('messagefromCl', '06set2202');
+		}
+		document.getElementById('5_vent').onclick = function() {
+			if (sets[6].charAt(10)=='0') socket.emit('messagefromCl', '06set22222222221');
+			else socket.emit('messagefromCl', '06set22222222220');
 		}
 		document.getElementById('time').onclick = function() {
 			socket.emit('messagefromCl', 'time');

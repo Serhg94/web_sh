@@ -46,6 +46,10 @@
 		else $('#5_svet1').addClass("ui-btn-active");
 		if (sets[6].charAt(10)=='0') $('#5_vent').removeClass("ui-btn-active");
 		else $('#5_vent').addClass("ui-btn-active");
+		if (sets[6].charAt(1)=='0') $('#5_svet2').removeClass("ui-btn-active");
+		else $('#5_svet2').addClass("ui-btn-active");
+		if (sets[6].charAt(0)=='0') $('#4_svet').removeClass("ui-btn-active");
+		else $('#4_svet').addClass("ui-btn-active");
 		
 		$("#1_tem").html("<br><b>"+stat[1][1]+"</b>");
 		$("#2_tem").html("<br><b>"+stat[2][1]+"</b>");
@@ -276,6 +280,14 @@ window.onload = function() {
 		}
 		document.getElementById('3_lock').onclick = function() {
 			socket.emit('messagefromCl', '03set222222222221');
+		}
+		document.getElementById('4_svet').onclick = function() {
+			if (sets[6].charAt(0)=='0') socket.emit('messagefromCl', '06set1222');
+			else socket.emit('messagefromCl', '06set0222');
+		}
+		document.getElementById('5_svet2').onclick = function() {
+			if (sets[6].charAt(1)=='0') socket.emit('messagefromCl', '06set21222');
+			else socket.emit('messagefromCl', '06set20222');
 		}
 		document.getElementById('sayinfobox').onclick = function() {changeOptions();}
 		document.getElementById('ddnightbox').onclick = function() {changeOptions();}

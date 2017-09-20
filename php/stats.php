@@ -1,42 +1,29 @@
 ﻿<?php
-include("config.php");
-
-global $host, $port, $param, $folder, $username, $password, $time_sec_chg;
-$imap = imap_open("{"."{$host}:{$port}{$param}"."}$folder",$username,$password) or die('Cannot connect to statistic: ' .imap_last_error()); 
-$numMessages = imap_num_msg($imap);
-for ($i = $numMessages; ($i > $numMessages-70)&&($i > 0); $i--) {
-    $header = imap_header($imap, $i);
- 
-    $fromInfo = $header->from[0];
-    $replyInfo = $header->reply_to[0];
- 
-    $details = array(
-        "fromAddr" => (isset($fromInfo->mailbox) && isset($fromInfo->host))
-            ? $fromInfo->mailbox . "@" . $fromInfo->host : "",
-        "fromName" => (isset($fromInfo->personal))
-            ? $fromInfo->personal : "",
-        "replyAddr" => (isset($replyInfo->mailbox) && isset($replyInfo->host))
-            ? $replyInfo->mailbox . "@" . $replyInfo->host : "",
-        "replyName" => (isset($replyTo->personal))
-            ? $replyto->personal : "",
-        "subject" => (isset($header->subject))
-            ? $header->subject : "",
-        "udate" => (isset($header->udate))
-            ? $header->udate : ""
-    );
-
-    $uid = imap_uid($imap, $i);
-    $details["udate"] = $details["udate"] + $time_sec_chg;
-	$details["subject"] = mb_convert_encoding($details["subject"], "UTF-8", "auto");
-    echo  "<b>" . date("d", $details["udate"]) . "." . date("m", $details["udate"]) 
-	. "." . date("y", $details["udate"]) . " " . date("H", $details["udate"]) 
-	. ":" . date("i", $details["udate"]) . ":" . date("s", $details["udate"]) .
-	"  " . "</b>" . $details["subject"] . "<br><br>";
-
-}
-
-imap_close($imap);
-	//<a href="index.php?logout">выход</a>
-
+	$link = mysql_connect('localhost', 'root', '');
+	if (!$link) {
+		die('Ошибка соединения: ' . mysql_error());
+	}
+	if (!mysql_select_db("smarthouse")) {
+		echo "Ошибка выбора базы данных smarthouse: " . mysql_error();
+		exit;
+	}
+	mysql_set_charset('utf8');
+	$sql = "SELECT * FROM `events` ORDER BY `idevents` DESC LIMIT 100";
+	$result = mysql_query($sql);
+	if (!$result) {
+		echo "Ошибка выполнения запроса: " . mysql_error();
+		exit;
+	}
+	if (mysql_num_rows($result) == 0) {
+		echo "Нет событий.";
+		exit;
+	}
+	while($row = mysql_fetch_assoc($result)) {
+		$row["description"] = mb_convert_encoding($row["description"], "UTF-8", "auto");
+		echo  "<b>" . $row["time"] .
+			"  " . "</b>" . $row["description"] . "<br><br>";
+	}
+	mysql_free_result($result);
+	mysql_close($link);
 ?>
 

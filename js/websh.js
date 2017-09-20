@@ -22,6 +22,12 @@
 		else $('#2_big').addClass("ui-btn-active");
 		if (sets[2].charAt(1)=='0') $('#2_lite').removeClass("ui-btn-active");
 		else $('#2_lite').addClass("ui-btn-active");
+		if (sets[2].charAt(2)=='1') $('#2_open').removeClass("ui-btn-active");
+		else $('#2_open').addClass("ui-btn-active");
+		if (sets[2].charAt(3)=='1') $('#2_close').removeClass("ui-btn-active");
+		else $('#2_close').addClass("ui-btn-active");
+		if (sets[2].charAt(12)=='0') $('#2_manual').removeClass("ui-btn-active");
+		else $('#2_manual').addClass("ui-btn-active");
 		if (sets[1].charAt(0)=='0') $('#1_big').removeClass("ui-btn-active");
 		else $('#1_big').addClass("ui-btn-active");
 		if (sets[1].charAt(1)=='0') $('#1_lite').removeClass("ui-btn-active");
@@ -273,10 +279,13 @@ window.onload = function() {
 			socket.emit('messagefromCl', 'temp');
 		}
 		document.getElementById('2_open').onclick = function() {
-			socket.emit('messagefromCl', '02set2212');
+			socket.emit('messagefromCl', '02set2232');
 		}
 		document.getElementById('2_close').onclick = function() {
-			socket.emit('messagefromCl', '02set2221');
+			socket.emit('messagefromCl', '02set2223');
+		}
+		document.getElementById('2_manual').onclick = function() {
+			socket.emit('messagefromCl', '02set2222222222223');
 		}
 		document.getElementById('3_lock').onclick = function() {
 			socket.emit('messagefromCl', '03set222222222221');
